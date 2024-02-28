@@ -6,6 +6,7 @@ import { mockLineData as data } from "../data/mockData";
 const LineChart = ({ isCustomLineColors = false, isDashboard = false }) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
+  const customLineColors = ["red", "green", "blue", "orange", "purple", "cyan"];
 
   return (
     <ResponsiveLine
@@ -43,7 +44,13 @@ const LineChart = ({ isCustomLineColors = false, isDashboard = false }) => {
           },
         },
       }}
-      colors={isDashboard ? { datum: "color" } : { scheme: "nivo" }} // added
+      colors={
+        isCustomLineColors
+          ? customLineColors  // Use custom colors if isCustomLineColors is true
+          : isDashboard
+          ? { datum: "color" }
+          : { scheme: "nivo" }
+      } // added
       margin={{ top: 50, right: 110, bottom: 50, left: 60 }}
       xScale={{ type: "point" }}
       yScale={{
